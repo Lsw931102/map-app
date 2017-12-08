@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="map_container">
+  <map id="map" longitude="{{lon}}" latitude="{{lat}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" show-location></map>
+</view>
+<view class="map_text">
+  <text class="h1">{{textData.name}}</text>
+  <text>{{textData.desc}}</text>
+  <text>约{{distance}}公里  打车约{{taxiCost}}元</text>
+</view>

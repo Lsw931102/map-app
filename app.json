@@ -1,0 +1,29 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/rentCar/rentCar"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#ddd",
+    "selectdColor": "#F57527",
+    "backgroundColor": "#fff",
+    "list": [{
+      "selectedIconPath": "images/moto.png",
+      "iconPath": "images/moto.png",
+      "pagePath": "pages/index/index",
+      "text": "我要租车"
+    },
+    {
+      "selectedIconPath": "images/chongdian.png",
+      "iconPath": "images/chongdian.png",
+      "pagePath": "pages/rentCar/rentCar",
+      "text": "我要换电"
+    }]
+  }
+}
