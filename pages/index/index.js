@@ -20,14 +20,10 @@ Page({
   onLoad: function() {
     let that = this;
     // 获取用户当前位置
-    wx.getLocation({
-      success: function(res) {
-        console.log(res)
-        that.setData({
-          lon: res.longitude,
-          lat: res.latitude
-        })
-      },
+    myAmap.getRegeo({
+      success: function (data) {
+        //成功回调
+      }
     })
     // 获取所有要显示的marker
     myAmap.getPoiAround({
