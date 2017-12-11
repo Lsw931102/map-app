@@ -21,9 +21,13 @@ Page({
     let that = this;
     // 获取用户当前位置
     myAmap.getRegeo({
-      success: function (data) {
-        //成功回调
-      }
+      success: function(res) {
+        console.log(res)
+        that.setData({
+          lon: res[0].longitude,
+          lat: res[0].latitude
+        })
+      },
     })
     // 获取所有要显示的marker
     myAmap.getPoiAround({
@@ -49,6 +53,10 @@ Page({
       }
     }
     that.showMarkerInfo(data);
+    wx.openLocation({
+      latitude: Number(data.latitude),
+      longitude: Number(data.longitude),
+    })
     that.getRouterLine(data)
   },
   // 显示相应点文本信息
@@ -96,5 +104,15 @@ Page({
       }
     })
     console.log(that.data)
+  },
+  // 打开本机导航
+  openLocation: function() {
+    let that = this;
+    wx.openLocation({
+      latitude: parseFloat(that.data.desLat),
+      longitude: parseFloat(that.data.desLon),
+      scale: 28
+    })
   }
+  
 })

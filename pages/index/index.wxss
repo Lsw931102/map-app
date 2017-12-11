@@ -5,6 +5,7 @@
   bottom: 160rpx;
   left: 0;
   right: 0;
+  z-index: 1
 }
 .map{
   width: 100%;
@@ -18,6 +19,19 @@
   height: 160rpx;
   background: #fff;
   padding: 0 30rpx;
+  z-index: 2
+}
+.map_text .half {
+  float: left;
+}
+.map_text .icon {
+  float: right;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+}
+.map_text .icon image{
+  width: 100rpx;
+  height: 100rpx;
 }
 text{
   margin: 10rpx 0;
