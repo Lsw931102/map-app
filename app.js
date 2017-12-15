@@ -1,39 +1,23 @@
 //app.js
+// 服务器地址配置
+let url_prefix = 'https://app.fast.wangziqing.cc'; // 线上环境
+if (wx.getSystemInfoSync().platform == "devtools") {
+  url_prefix = 'https://app.fast.wangziqing.cc'; // 开发环境
+}
+const Loading = require('utils/loading');
+const oauth = require('utils/oauth');
+oauth.url_prefix = url_prefix;
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
+    
+  },
+  // 调取接口方法封装
+  request: function (obj, mark) {
+    // obj为传入参数，mark为loading是否显示
+    oauth.request(obj, mark);
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    steps: [] // 线路详情
   }
 })

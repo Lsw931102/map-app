@@ -1,14 +1,23 @@
 <!--index.wxml-->
 <view class="map_container">
-  <map id="map" longitude="{{lon}}" latitude="{{lat}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" show-location></map>
-</view>
-<view class="map_text">
-  <view class='half'>
-    <text class="h1">{{textData.name}}</text>
-    <text>{{textData.desc}}</text>
-    <text>约{{distance}}公里  打车约{{taxiCost}}元</text>
-  </view>
-  <view class='half icon'>
-   <image bindtap='openLocation' src='../../images/car-marker.png' mode="scaleToFill"></image>
-  </view>
+  <map id="map" longitude="{{lon}}" latitude="{{lat}}" scale="14" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location>
+    <cover-view class="cover {{actionSheetHidden?'hide' : 'show'}}">
+      <cover-view class='cover-content'>
+        <cover-view class='list'>
+          <cover-view  wx:for-items="{{actionSheetItems}}" class='list-item' bindtap="bind{{item.bindtap}}">{{item.txt}}</cover-view>
+        </cover-view>
+        <cover-view class='cancel' bindtap='actionSheetTap'>取消</cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-view  class="map_text {{actionSheetHidden?'show' : 'hide'}}">
+      <cover-view  class='half'>
+        <cover-view class='h1'>{{textData.address}}</cover-view>
+        <cover-view class='h2'>联系电话：<cover-view class='link' bindtap='phoneCall'>{{textData.phone}}</cover-view></cover-view>
+        <cover-view class='h2'>联系人：{{textData.contanct}}</cover-view>
+      </cover-view>
+      <cover-view  class='half icon'>
+        <cover-image  bindtap='actionSheetTap' src='../../images/navigator.png'></cover-image>
+      </cover-view>
+    </cover-view>
+  </map>
 </view>
