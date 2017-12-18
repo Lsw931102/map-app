@@ -8,12 +8,117 @@
   padding: 20rpx 0;
   box-sizing: border-box;
 } 
-.map_container{
-  width: 100%;
-  height: 100vh
+
+/**common.wxss**/
+.map_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 map {
   width: 100%;
-  height: 100%; 
+  height: 100%;
+}
+map .cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2
+}
+map .cover .cover-content { 
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30rpx 0;
   margin: 0 auto;
+  background-color: #ffffff;
+  color: #000000;
+}
+map .cover .cover-content .list .list-item {
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #dddddd;
+  text-align: center
+}
+map .cover .cover-content .list .list-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+map .cover .cover-content .cancel {
+  font-size: 32rpx;
+  margin-top: 10rpx;
+  padding-top: 10rpx;
+  /* border-top: 4px solid #dddddd; */
+  text-align: center
+}
+.map_text{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  height: 16%;
+  background: #fff;
+  padding: 10rpx 30rpx;
+  z-index: 1
+}
+.map_text .half {
+  display: inline-block
+}
+.map_text .half .link {
+  display: inline-block;
+  color: #0000ff;
+  font-size: 28rpx;
+  width: 260rpx;
+}
+.map_text .icon {
+  float: right;
+  margin: 40rpx auto;
+}
+.map_text .icon cover-image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.map_text .h2{
+   margin: 10rpx 0; 
+  display: block;
+  font-size:28rpx;
+}
+.h1{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 16rpx 0;
+  font-size:32rpx;
+}
+.hide {
+  /* display: none; */
+  animation: slidown 0.5s ease-in both;
+}
+.show {
+  /* display: block; */
+  animation: slidup 0.5s ease-in both;
+}
+/*筛选项隐藏 显示动画 start*/
+@keyframes slidown {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes sliup {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
 }

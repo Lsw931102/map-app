@@ -1,4 +1,23 @@
-<!--logs.wxml-->
+<!--rentCar.wxml-->
 <view class="map_container">
-  <map id="myMap" longitude="{{lon}}" latitude="{{lat}}" scale="14" markers="{{markers}}" bindmarkertap="markertap" bindcallouttap="callouttap" show-location></map>
+  <map id="myMap" longitude="{{lon}}" latitude="{{lat}}" scale="14" markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markertap" show-location>
+    <cover-view class="cover {{actionSheetHidden?'hide' : 'show'}}"  wx:if="{{!actionSheetHidden}}">
+      <cover-view class='cover-content'>
+        <cover-view class='list'>
+          <cover-view  wx:for-items="{{actionSheetItems}}" class='list-item' bindtap="bind{{item.bindtap}}">{{item.txt}}</cover-view>
+        </cover-view>
+        <cover-view class='cancel' bindtap='actionSheetTap'>取消</cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-view  class="map_text {{actionSheetHidden?'show' : 'hide'}}"  wx:if="{{actionSheetHidden}}">
+      <cover-view  class='half'>
+        <cover-view class='h1'>{{textData.address}}</cover-view>
+        <cover-view class='h2'>联系电话：<cover-view class='link' bindtap='phoneCall'>{{textData.phone}}</cover-view></cover-view>
+        <cover-view class='h2'>联系人：{{textData.contanct}}</cover-view>
+      </cover-view>
+      <cover-view  class='half icon'>
+        <cover-image  bindtap='actionSheetTap' src='../../images/navigator.png'></cover-image>
+      </cover-view>
+    </cover-view>
+  </map>
 </view>
