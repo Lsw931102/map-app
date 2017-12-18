@@ -17,7 +17,7 @@
 .text_box {
   margin: 0 15px;
   padding: 15px 0;
-  border-bottom: 1px solid #1AAD16;
+  border-bottom: 1px solid #dddddd;
   font-size: 13px;
 }
 .text_box .text_item {

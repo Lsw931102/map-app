@@ -3,7 +3,9 @@
 const app = getApp()
 // 引入高德地图微信小程序SDK
 const amap = require('../../libs/amap-wx.js');
-const myAmap = new amap.AMapWX({ key: 'bac3e5b0f9171b77417a8ccf11fd451c' });
+const config = require('../../libs/config.js');
+
+const myAmap = new amap.AMapWX({ key: config.Config.key });
 Page({
   data: {
     lon: '', // 当前位置纬度
@@ -18,17 +20,13 @@ Page({
     rightMarker: {}, // 当前点击的marker
     actionSheetHidden: true, // 上拉菜单的显隐
     actionSheetItems: [
-      { bindtap: 'Menu1', txt: '显示线路' },
+      // { bindtap: 'Menu1', txt: '显示线路' },
       { bindtap: 'Menu2', txt: '线路详情' },
       { bindtap: 'Menu3', txt: '使用本机地图导航' }
     ],
     menu: '' // 选择的菜单
   },
-  onReady: function() {
-    console.log('1')
-  },
   onLoad: function() {
-    console.log('2')
     let that = this;
     myAmap.getRegeo({
       success: function (data) {
@@ -38,18 +36,18 @@ Page({
           lon: data[0].longitude,
           lat: data[0].latitude
         })
+        that.getMarkers();
+        that.showMarkerInfo(that.data.markers[0]);
+        that.setData({
+          rightMarker: that.data.markers[0]
+        })
+        that.getRouterLine();
       },
       fail: function (info) {
         //失败回调
         console.log(info)
       }
     })
-    that.getMarkers();
-    that.showMarkerInfo(that.data.markers[0]);
-    that.setData({
-      rightMarker: that.data.markers[0]
-    })
-    that.getRouterLine();
   },
   // 获取所有markers数据
   getMarkers: function() {
@@ -85,7 +83,6 @@ Page({
   },
   // marker点击
   markertap: function(e) {
-    console.log(e);
     const that = this;
     that.setData({
       polyline: []
@@ -98,10 +95,8 @@ Page({
         markersArr[i].iconPath = '../../images/marker_checked.png';
         data = markersArr[i];
         that.data.rightMarker = markersArr[i];
-        // that.data.markers[i].iconPath = '../../images/marker_checked.png';
       } else {
         markersArr[i].iconPath = '../../images/marker.png';
-        // that.data.markers[i].iconPath = '../../images/marker.png';
       }
     }
     // 改变点击icon的图标颜色
@@ -111,7 +106,7 @@ Page({
     // debugger
     that.showMarkerInfo(data);
     
-    // that.getRouterLine(data)
+    that.getRouterLine();
   },
   // 显示相应点文本信息
   showMarkerInfo: function (data) {
@@ -137,20 +132,6 @@ Page({
     this.setData({
       actionSheetHidden: !this.data.actionSheetHidden
     })
-    console.log('qqqq', this.data.actionSheetHidden)
-  },
-  actionSheetbindchange: function () {
-    this.setData({
-      actionSheetHidden: !this.data.actionSheetHidden
-    })
-  },
-  // 显示路线
-  bindMenu1: function () {
-    this.setData({
-      menu: 1,
-      actionSheetHidden: !this.data.actionSheetHidden
-    })
-    this.getRouterLine();
   },
   // 显示路线详情
   bindMenu2: function () {
@@ -177,14 +158,12 @@ Page({
       success: function(res) {
         console.log(res);
         let points = []; // 路线经过点的经纬度
-        if(res.paths&&res.paths.length&&res.paths[0].steps) {
+        if(res.paths && res.paths[0] && res.paths[0].steps) {
           let steps = res.paths[0].steps;
           app.globalData.steps = steps;
-          let i = 0;
-          let j = 0;
-          for(i; i < steps.length; i++) {
+          for(let i = 0; i < steps.length; i++) {
             var poLen = steps[i].polyline.split(';')
-            for (j; j < poLen.length; j++) {
+            for (let j = 0; j < poLen.length; j++) {
               points.push({
                 longitude: parseFloat(poLen[j].split(',')[0]),
                 latitude: parseFloat(poLen[j].split(',')[1])
@@ -195,7 +174,7 @@ Page({
         that.setData({
           polyline: [{
             points: points,
-            color: "#F57527",
+            color: "#0091ff",
             width: 4
           }]
         })
@@ -218,6 +197,7 @@ Page({
     wx.openLocation({
       latitude: Number(that.data.rightMarker.latitude),
       longitude: Number(that.data.rightMarker.longitude),
+      name: that.data.rightMarker.title.split('/')[0],
       scale: 28
     })
   },

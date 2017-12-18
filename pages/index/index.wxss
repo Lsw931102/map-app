@@ -17,12 +17,12 @@ map .cover {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2
 }
-map .cover .cover-content {
+map .cover .cover-content { 
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 20rpx 0;
+  padding: 30rpx 0;
   margin: 0 auto;
   background-color: #ffffff;
   color: #000000;
@@ -30,7 +30,7 @@ map .cover .cover-content {
 map .cover .cover-content .list .list-item {
   font-size: 32rpx;
   margin-bottom: 20rpx;
-  padding-bottom: 10rpx;
+  padding-bottom: 20rpx;
   border-bottom: 1px solid #dddddd;
   text-align: center
 }
@@ -42,7 +42,7 @@ map .cover .cover-content .cancel {
   font-size: 32rpx;
   margin-top: 10rpx;
   padding-top: 10rpx;
-  border-top: 4px solid #dddddd;
+  /* border-top: 4px solid #dddddd; */
   text-align: center
 }
 .map_text{
@@ -62,6 +62,7 @@ map .cover .cover-content .cancel {
   display: inline-block;
   color: #0000ff;
   font-size: 28rpx;
+  width: 260rpx;
 }
 .map_text .icon {
   float: right;
@@ -84,12 +85,12 @@ map .cover .cover-content .cancel {
   font-size:32rpx;
 }
 .hide {
-  display: none;
-  animation: slidown 0.1s ease-in both;
+  /* display: none; */
+  animation: slidown 0.5s ease-in both;
 }
 .show {
-  display: block;
-  animation: slidup 0.2s ease-in both;
+  /* display: block; */
+  animation: slidup 0.5s ease-in both;
 }
 /*筛选项隐藏 显示动画 start*/
 @keyframes slidown {
